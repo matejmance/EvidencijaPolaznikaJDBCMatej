@@ -12,44 +12,20 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) {
 
-        try{
-            List<Polaznik> listaPolaznika = dohvatiSvePolaznike();
+        PolaznikRepository polaznikRepository = new PolaznikRepository();
+        List<Polaznik> listaPolaznika = new ArrayList<>();
 
-            listaPolaznika.forEach(System.out::println);
-            System.out.println();
-            System.out.println("Broj polaznika: " + listaPolaznika.size());
-        }catch (SQLException e){
-            System.err.println(e.getMessage());
+        try {
+
+            listaPolaznika = polaznikRepository.dohvatiSvePolaznike();
+
+            listaPolaznika.forEach(polaznik -> {System.out.println(polaznik+ "\n"); });
+            System.out.println("Broj polaznika:"+listaPolaznika.size());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
 
-
-    }
-    
-    public static List<Polaznik> dohvatiSvePolaznike() throws SQLException{
-        ArrayList<Polaznik> listaPolaznika = new ArrayList<>();
-
-        try(Connection connection = DatabaseConnection.getConnection()) {
-            System.out.println("Connected to database.");
-
-            String sql = "SELECT * FROM Polaznik";
-
-            try(PreparedStatement statement = connection.prepareStatement(sql);
-                ResultSet rs = statement.executeQuery()) {
-
-                while (rs.next()) {
-                    String ime = rs.getString("Ime");
-                    String prezime = rs.getString("Prezime");
-                    String email = rs.getString("Email");
-                    int godinaUpisa = rs.getInt("GodinaUpisa");
-
-
-                    Polaznik polaznik = new Polaznik(ime, prezime, email, godinaUpisa);
-                    listaPolaznika.add(polaznik);
-                }
-
-            }
-        }
-        return listaPolaznika;
     }
 }
