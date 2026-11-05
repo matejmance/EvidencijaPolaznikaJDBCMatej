@@ -12,6 +12,10 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) {
 
+        ArrayList<Polaznik> listaPolaznika = new ArrayList<>();
+
+
+
         try(Connection connection = DatabaseConnection.getConnection()) {
             System.out.println("Connected to database.");
 
@@ -25,11 +29,10 @@ public class Main {
                     String prezime = rs.getString("Prezime");
                     String email = rs.getString("Email");
                     int godinaUpisa = rs.getInt("GodinaUpisa");
-                    System.out.println("Ime: " + ime);
-                    System.out.println("Prezime: " + prezime);
-                    System.out.println("Email: " + email);
-                    System.out.println("Godina upisa: " + godinaUpisa);
-                    System.out.println();
+
+
+                    Polaznik polaznik =  new Polaznik(ime, prezime, email, godinaUpisa);
+                    listaPolaznika.add(polaznik);
                 }
 
             }catch (SQLException e) {
@@ -39,6 +42,10 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        listaPolaznika.forEach(System.out::println);
+        System.out.println();
+        System.out.println("Broj polaznika: " + listaPolaznika.size());
 
 
     }
