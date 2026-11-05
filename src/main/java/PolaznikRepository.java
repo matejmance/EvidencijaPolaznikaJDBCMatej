@@ -63,18 +63,22 @@ public class PolaznikRepository {
         try(Connection connection = DatabaseConnection.getConnection()) {
             System.out.println("Connected to database.");
 
-            String sql = "INSERT INTO Polaznik VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Polaznik (Ime , Prezime , Email , GodinaUpisa) VALUES (?, ?, ?, ?)";
             try(PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, polaznik.getIme());
                 statement.setString(2, polaznik.getPrezime());
                 statement.setString(3, polaznik.getEmail());
                 statement.setInt(4, polaznik.getGodinaUpisa());
 
-                statement.executeUpdate();
-                return true;
+                int provjera = statement.executeUpdate();
+                if(provjera == 1){
+                    System.out.println("Polaznik dodan");
+                    return true;
+                }
             }
 
         }
+        return false;
     }
 
 

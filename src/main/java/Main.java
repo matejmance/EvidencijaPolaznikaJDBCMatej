@@ -17,21 +17,34 @@ public class Main {
 
         try {
 
+
+
+
+            String trazeniEmail = "1@gmail.com";
+
+            Optional<Polaznik> polaznik1 = polaznikRepository.dohvatiPoMailu(trazeniEmail);
+
+            if(polaznik1.isEmpty()){
+                System.out.println("Ne postoji polaznik s trazenim mailom!");
+            }else {
+                System.out.println(polaznik1);
+            }
+
+
+            Polaznik noviPolaznik = new Polaznik("Antonio","Stejpanovic","2@gmail.com",2026);
+            polaznikRepository.dodajPolaznika(noviPolaznik);
+
+            System.out.println();
+            System.out.println();
+            System.out.println();
+
             listaPolaznika = polaznikRepository.dohvatiSvePolaznike();
 
             listaPolaznika.forEach(polaznik -> {System.out.println(polaznik+ "\n"); });
             System.out.println("Broj polaznika:"+listaPolaznika.size());
 
 
-            String trazeniEmail = "1@gmail.com";
 
-            Optional<Polaznik> polaznik = polaznikRepository.dohvatiPoMailu(trazeniEmail);
-
-            if(polaznik.isEmpty()){
-                System.out.println("Ne postoji polaznik s trazenim mailom!");
-            }else {
-                System.out.println(polaznik);
-            }
 
 
         } catch (SQLException e) {
