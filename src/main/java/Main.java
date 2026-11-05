@@ -26,8 +26,8 @@ public class Main {
                 System.out.println(polaznik1);
             }
 
-            //            Polaznik noviPolaznik = new Polaznik("Antonio","Stejpanovic","2@gmail.com",2026);
-            //            polaznikRepository.dodajPolaznika(noviPolaznik);
+            Polaznik noviPolaznik = new Polaznik("Antonio","Stejpanovic","2@gmail.com",2026);
+            polaznikRepository.dodajPolaznika(noviPolaznik);
 
             System.out.println("\n \n");
 
@@ -39,6 +39,8 @@ public class Main {
             System.out.println("\n \n");
 
             polaznikRepository.obrisiPolaznika("2@gmail.com");
+
+            System.out.println("\n \n");
 
             listaPolaznika = polaznikRepository.dohvatiSvePolaznike();
 

@@ -119,5 +119,34 @@ public class PolaznikRepository {
         return false;
     }
 
+    public boolean dodajDvaPolaznika(Polaznik prvi , Polaznik drugi) throws SQLException {
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected to database.");
+            connection.setAutoCommit(false);
+            String sql = "INSERT INTO Polaznik (Ime , Prezime , Email , GodinaUpisa) VALUES (?, ?, ?, ?)";
+            try(PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, prvi.getIme());
+                statement.setString(2, prvi.getPrezime());
+                statement.setString(3, prvi.getEmail());
+                statement.setInt(4, prvi.getGodinaUpisa());
+                int provjera1 = statement.executeUpdate();
+                if(provjera1 == 1){
+                    System.out.println("Polaznik dodan");
+                    return true;
+                }
+
+                statement.setString(1, drugi.getIme());
+                statement.setString(2, drugi.getPrezime());
+                statement.setString(3, drugi.getEmail());
+                statement.setInt(4, drugi.getGodinaUpisa());
+                int provjera2 = statement.executeUpdate();
+                if(provjera2 == 1){
+                    System.out.println("Polaznik dodan");
+                }
+
+            }
+        }
+    }
+
 
 }
