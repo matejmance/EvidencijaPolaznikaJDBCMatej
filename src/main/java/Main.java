@@ -12,9 +12,22 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) {
 
+        try{
+            List<Polaznik> listaPolaznika = dohvatiSvePolaznike();
+
+            listaPolaznika.forEach(System.out::println);
+            System.out.println();
+            System.out.println("Broj polaznika: " + listaPolaznika.size());
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+
+
+
+    }
+    
+    public static List<Polaznik> dohvatiSvePolaznike(){
         ArrayList<Polaznik> listaPolaznika = new ArrayList<>();
-
-
 
         try(Connection connection = DatabaseConnection.getConnection()) {
             System.out.println("Connected to database.");
@@ -42,11 +55,6 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        listaPolaznika.forEach(System.out::println);
-        System.out.println();
-        System.out.println("Broj polaznika: " + listaPolaznika.size());
-
-
+        return listaPolaznika;
     }
 }
