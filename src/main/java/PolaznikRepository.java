@@ -4,8 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PolaznikRepository {
+
+
     public List<Polaznik> dohvatiSvePolaznike() throws SQLException {
         ArrayList<Polaznik> listaPolaznika = new ArrayList<>();
 
@@ -32,4 +35,29 @@ public class PolaznikRepository {
         }
         return listaPolaznika;
     }
+
+    public Optional<Polaznik> dohvatiPoMailu(String email) throws SQLException {
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected to database.");
+            String sql = "SELECT * FROM Polaznik WHERE Email = ?";
+            try(PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                statement.setString(1, email);
+                try(ResultSet rs = statement.executeQuery()) {
+                    if (rs.next()) {
+                        String ime = rs.getString("Ime");
+                        String prezime = rs.getString("Prezime");
+                        String email2 = rs.getString("Email");
+                        int godinaUpisa = rs.getInt("GodinaUpisa");
+
+                        Polaznik polaznik = new Polaznik(ime, prezime, email, godinaUpisa);
+                        return Optional.of(polaznik);
+                    }
+                }
+            }
+        }
+        return  Optional.empty();
+    }
+
+
 }
