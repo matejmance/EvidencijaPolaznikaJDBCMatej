@@ -130,22 +130,29 @@ public class PolaznikRepository {
                 statement.setString(3, prvi.getEmail());
                 statement.setInt(4, prvi.getGodinaUpisa());
                 int provjera1 = statement.executeUpdate();
-                if(provjera1 == 1){
-                    System.out.println("Polaznik dodan");
-                    return true;
-                }
+
+
 
                 statement.setString(1, drugi.getIme());
                 statement.setString(2, drugi.getPrezime());
                 statement.setString(3, drugi.getEmail());
                 statement.setInt(4, drugi.getGodinaUpisa());
                 int provjera2 = statement.executeUpdate();
-                if(provjera2 == 1){
-                    System.out.println("Polaznik dodan");
+
+                if(provjera1 == 1 && provjera2 == 1){
+                    System.out.println("Polaznici dodani");
+                    connection.commit();
+                    return  true;
+                }else {
+                    connection.rollback();
                 }
 
+
+            }catch (SQLException e){
+                connection.rollback();
             }
         }
+        return  false;
     }
 
 
