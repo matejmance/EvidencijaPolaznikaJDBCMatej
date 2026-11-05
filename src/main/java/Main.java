@@ -15,19 +15,25 @@ public class Main {
         try(Connection connection = DatabaseConnection.getConnection()) {
             System.out.println("Connected to database.");
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Polaznik");
-            ResultSet rs = statement.executeQuery();
+            String sql = "SELECT * FROM Polaznik";
 
-            while (rs.next()) {
-                String ime =  rs.getString("Ime");
-                String prezime = rs.getString("Prezime");
-                String email = rs.getString("Email");
-                String godinaUpisa = rs.getString("GodinaUpisa");
-                System.out.println("Ime: "+ime);
-                System.out.println("Prezime: "+prezime);
-                System.out.println("Email: "+email);
-                System.out.println("Godina upisa: "+godinaUpisa);
-                System.out.println();
+            try(PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet rs = statement.executeQuery()) {
+
+                while (rs.next()) {
+                    String ime = rs.getString("Ime");
+                    String prezime = rs.getString("Prezime");
+                    String email = rs.getString("Email");
+                    int godinaUpisa = rs.getInt("GodinaUpisa");
+                    System.out.println("Ime: " + ime);
+                    System.out.println("Prezime: " + prezime);
+                    System.out.println("Email: " + email);
+                    System.out.println("Godina upisa: " + godinaUpisa);
+                    System.out.println();
+                }
+
+            }catch (SQLException e) {
+                e.printStackTrace();
             }
 
         } catch (SQLException e) {
