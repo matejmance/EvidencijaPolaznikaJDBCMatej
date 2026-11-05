@@ -18,7 +18,7 @@ public class Main {
             listaPolaznika.forEach(System.out::println);
             System.out.println();
             System.out.println("Broj polaznika: " + listaPolaznika.size());
-        }catch (Exception e){
+        }catch (SQLException e){
             System.err.println(e.getMessage());
         }
 
@@ -26,7 +26,7 @@ public class Main {
 
     }
     
-    public static List<Polaznik> dohvatiSvePolaznike(){
+    public static List<Polaznik> dohvatiSvePolaznike() throws SQLException{
         ArrayList<Polaznik> listaPolaznika = new ArrayList<>();
 
         try(Connection connection = DatabaseConnection.getConnection()) {
@@ -44,16 +44,11 @@ public class Main {
                     int godinaUpisa = rs.getInt("GodinaUpisa");
 
 
-                    Polaznik polaznik =  new Polaznik(ime, prezime, email, godinaUpisa);
+                    Polaznik polaznik = new Polaznik(ime, prezime, email, godinaUpisa);
                     listaPolaznika.add(polaznik);
                 }
 
-            }catch (SQLException e) {
-                e.printStackTrace();
             }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
         return listaPolaznika;
     }
