@@ -101,5 +101,23 @@ public class PolaznikRepository {
         return false;
     }
 
+    public boolean obrisiPolaznika(String email) throws SQLException {
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected to database.");
+            String sql = "DELETE FROM Polaznik WHERE Email = ?";
+            try(PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, email);
+                int provjera = statement.executeUpdate();
+                if(provjera == 1){
+                    System.out.println("Polaznik obrisan");
+                    return true;
+                }else {
+                    System.out.println("Polaznik s tom Email adresom ne postoji");
+                }
+            }
+        }
+        return false;
+    }
+
 
 }

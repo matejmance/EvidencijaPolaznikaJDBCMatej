@@ -16,10 +16,6 @@ public class Main {
         List<Polaznik> listaPolaznika;
 
         try {
-
-
-
-
             String trazeniEmail = "1@gmail.com";
 
             Optional<Polaznik> polaznik1 = polaznikRepository.dohvatiPoMailu(trazeniEmail);
@@ -30,23 +26,25 @@ public class Main {
                 System.out.println(polaznik1);
             }
 
+            //            Polaznik noviPolaznik = new Polaznik("Antonio","Stejpanovic","2@gmail.com",2026);
+            //            polaznikRepository.dodajPolaznika(noviPolaznik);
 
-//            Polaznik noviPolaznik = new Polaznik("Antonio","Stejpanovic","2@gmail.com",2026);
-//            polaznikRepository.dodajPolaznika(noviPolaznik);
+            System.out.println("\n \n");
 
-            System.out.println();
-            System.out.println();
-            System.out.println();
+
+            polaznikRepository.azurirajGodinuUpisa("2@gmail.com",2029);
+
+            System.out.println(polaznikRepository.dohvatiPoMailu("2@gmail.com"));
+
+            System.out.println("\n \n");
+
+            polaznikRepository.obrisiPolaznika("2@gmail.com");
 
             listaPolaznika = polaznikRepository.dohvatiSvePolaznike();
 
             listaPolaznika.forEach(polaznik -> {System.out.println(polaznik+ "\n"); });
             System.out.println("Broj polaznika:"+listaPolaznika.size());
 
-            polaznikRepository.azurirajGodinuUpisa("2@gmail.com",2029);
-
-
-            System.out.println(polaznikRepository.dohvatiPoMailu("2@gmail.com"));
 
 
 
