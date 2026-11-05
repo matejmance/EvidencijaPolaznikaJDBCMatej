@@ -59,5 +59,23 @@ public class PolaznikRepository {
         return  Optional.empty();
     }
 
+    public boolean dodajPolaznika(Polaznik polaznik) throws SQLException {
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected to database.");
+
+            String sql = "INSERT INTO Polaznik VALUES (?, ?, ?, ?)";
+            try(PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, polaznik.getIme());
+                statement.setString(2, polaznik.getPrezime());
+                statement.setString(3, polaznik.getEmail());
+                statement.setInt(4, polaznik.getGodinaUpisa());
+
+                statement.executeUpdate();
+                return true;
+            }
+
+        }
+    }
+
 
 }

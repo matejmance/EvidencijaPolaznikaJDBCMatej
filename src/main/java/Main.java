@@ -25,10 +25,12 @@ public class Main {
 
             String trazeniEmail = "1@gmail.com";
 
-            if(polaznikRepository.dohvatiPoMailu(trazeniEmail).isEmpty()){
-                System.out.println("Polaznik s trazenim mailom " +trazeniEmail+ " ne postoji");
+            Optional<Polaznik> polaznik = polaznikRepository.dohvatiPoMailu(trazeniEmail);
+
+            if(polaznik.isEmpty()){
+                System.out.println("Ne postoji polaznik s trazenim mailom!");
             }else {
-                System.out.println(polaznikRepository.dohvatiPoMailu(trazeniEmail));
+                System.out.println(polaznik);
             }
 
 
