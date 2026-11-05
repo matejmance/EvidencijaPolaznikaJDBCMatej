@@ -23,8 +23,14 @@ public class Main {
             System.out.println("Broj polaznika:"+listaPolaznika.size());
 
 
-            System.out.println(polaznikRepository.dohvatiPoMailu("1@gmail.com"));
-            System.out.println(polaznikRepository.dohvatiPoMailu("2@gmail.com"));
+            String trazeniEmail = "1@gmail.com";
+
+            if(polaznikRepository.dohvatiPoMailu(trazeniEmail).isEmpty()){
+                System.out.println("Polaznik s trazenim mailom " +trazeniEmail+ " ne postoji");
+            }else {
+                System.out.println(polaznikRepository.dohvatiPoMailu(trazeniEmail));
+            }
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
