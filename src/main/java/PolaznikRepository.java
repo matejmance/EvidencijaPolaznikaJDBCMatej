@@ -81,5 +81,25 @@ public class PolaznikRepository {
         return false;
     }
 
+    public boolean azurirajGodinuUpisa(String email, int novaGodina) throws SQLException {
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected to database.");
+
+            String sql = "UPDATE Polaznik SET GodinaUpisa = ? WHERE Email = ?";
+            try(PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, novaGodina);
+                statement.setString(2, email);
+                int provjera = statement.executeUpdate();
+                if(provjera == 1){
+                    System.out.println("Polaznik azuriran");
+                    return true;
+                }else{
+                    System.out.println("Polaznik s tom Email adresom ne postoji");
+                }
+            }
+        }
+        return false;
+    }
+
 
 }

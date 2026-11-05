@@ -31,8 +31,8 @@ public class Main {
             }
 
 
-            Polaznik noviPolaznik = new Polaznik("Antonio","Stejpanovic","2@gmail.com",2026);
-            polaznikRepository.dodajPolaznika(noviPolaznik);
+//            Polaznik noviPolaznik = new Polaznik("Antonio","Stejpanovic","2@gmail.com",2026);
+//            polaznikRepository.dodajPolaznika(noviPolaznik);
 
             System.out.println();
             System.out.println();
@@ -42,6 +42,11 @@ public class Main {
 
             listaPolaznika.forEach(polaznik -> {System.out.println(polaznik+ "\n"); });
             System.out.println("Broj polaznika:"+listaPolaznika.size());
+
+            polaznikRepository.azurirajGodinuUpisa("2@gmail.com",2029);
+
+
+            System.out.println(polaznikRepository.dohvatiPoMailu("2@gmail.com"));
 
 
 
