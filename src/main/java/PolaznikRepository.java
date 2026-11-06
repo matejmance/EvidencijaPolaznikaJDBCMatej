@@ -140,16 +140,18 @@ public class PolaznikRepository {
                 int provjera2 = statement.executeUpdate();
 
                 if(provjera1 == 1 && provjera2 == 1){
-                    System.out.println("Polaznici dodani");
                     connection.commit();
+                    System.out.println("Polaznici dodani");
                     return  true;
                 }else {
                     connection.rollback();
+
                 }
 
 
             }catch (SQLException e){
                 connection.rollback();
+                throw e;
             }
         }
         return  false;

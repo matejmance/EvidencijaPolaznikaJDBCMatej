@@ -47,6 +47,18 @@ public class Main {
             listaPolaznika.forEach(polaznik -> {System.out.println(polaznik+ "\n"); });
             System.out.println("Broj polaznika:"+listaPolaznika.size());
 
+            System.out.println("\n \n");
+
+            Polaznik polaznik2 = new Polaznik("Karla","Sostar","ksostar@gmail.com",2026);
+            Polaznik polaznik3 = new Polaznik("Stjepko","Kovacic","skovacic@gmail.com",2026);
+
+            polaznikRepository.dodajDvaPolaznika(polaznik2,polaznik3);
+
+            System.out.println(polaznikRepository.dohvatiPoMailu("ksostar2mn  @gmail.com"));
+            System.out.println(polaznikRepository.dohvatiPoMailu("skovacic@gmail.com"));
+
+
+
 
 
 
