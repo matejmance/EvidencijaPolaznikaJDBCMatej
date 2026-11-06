@@ -81,6 +81,11 @@ public class PolaznikTest {
         assertEquals("a@gmail.com", lista.getFirst().getEmail());
         assertEquals("b@gmail.com",lista.get(1).getEmail());
         assertEquals("c@gmail.com",lista.get(2).getEmail());
+    }
+    @Test
+    void compareToSaNullBacaIznimku(){
+        Polaznik prvi = new Polaznik("Matej", "Mance", "c@gmail.com", 2024);
+        assertThrows(NullPointerException.class, () -> prvi.compareTo((Polaznik)null));
 
     }
 
