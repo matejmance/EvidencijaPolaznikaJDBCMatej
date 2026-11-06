@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -155,6 +152,22 @@ public class PolaznikRepository {
             }
         }
         return  false;
+    }
+
+    public int prebrojiPolaznikeNakonGodine(int godina) throws SQLException {
+        int res;
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected to database.");
+
+            try (CallableStatement statement = connection.prepareCall("{call PrebrojiPolaznikeNakonGodine(?,?)}");) {
+                statement.setInt(1, godina);
+                statement.registerOutParameter(2, Types.INTEGER);
+                statement.execute();
+                res = statement.getInt(2);
+
+            }
+        }
+        return res;
     }
 
 
