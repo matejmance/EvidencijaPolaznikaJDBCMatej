@@ -33,7 +33,31 @@ public class PolaznikTest {
 
         assertEquals(prviHash, drugiHash);
 
+    }
+    @Test
+    void prviPolaznikDolaziPrijeDrugog(){
+        Polaznik prvi = new Polaznik("Matej", "Mance", "a@gmail.com", 2024);
+        Polaznik drugi = new Polaznik("Ivan", "Horvat", "b@gmail.com", 2025);
 
+        int rezultat = prvi.compareTo(drugi);
+        assertTrue(rezultat < 0);
+
+    }
+    @Test
+    void prviPolaznikDolaziNakonDrugog(){
+        Polaznik prvi = new Polaznik("Matej", "Mance", "b@gmail.com", 2024);
+        Polaznik drugi = new Polaznik("Ivan", "Horvat", "a@gmail.com", 2025);
+
+        int rezultat = prvi.compareTo(drugi);
+        assertTrue(rezultat > 0);
+    }
+    @Test
+    void istiEmailVracaNulu(){
+        Polaznik prvi = new Polaznik("Matej", "Mance", "a@gmail.com", 2024);
+        Polaznik drugi = new Polaznik("Ivan", "Horvat", "a@gmail.com", 2025);
+
+        int rezultat = prvi.compareTo(drugi);
+        assertEquals(0, rezultat);
     }
 
 }
