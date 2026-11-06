@@ -1,5 +1,9 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PolaznikTest {
@@ -58,6 +62,26 @@ public class PolaznikTest {
 
         int rezultat = prvi.compareTo(drugi);
         assertEquals(0, rezultat);
+    }
+
+    @Test
+    void polazniciSeSortirajuPoEmailu() {
+        List<Polaznik> lista = new ArrayList<>();
+        Polaznik prvi = new Polaznik("Matej", "Mance", "c@gmail.com", 2024);
+        Polaznik drugi = new Polaznik("Ivan", "Horvat", "a@gmail.com", 2025);
+        Polaznik treci = new Polaznik("Ivan", "kovacic", "b@gmail.com", 2025);
+
+        lista.add(prvi);
+        lista.add(drugi);
+        lista.add(treci);
+
+
+        Collections.sort(lista);
+
+        assertEquals("a@gmail.com", lista.getFirst().getEmail());
+        assertEquals("b@gmail.com",lista.get(1).getEmail());
+        assertEquals("c@gmail.com",lista.get(2).getEmail());
+
     }
 
 }
