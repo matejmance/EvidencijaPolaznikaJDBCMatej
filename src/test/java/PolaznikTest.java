@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PolaznikTest {
     @Test
@@ -22,6 +21,19 @@ public class PolaznikTest {
         boolean rezultat = prvi.equals(drugi);
 
         assertFalse(rezultat);
+    }
+
+    @Test
+    void jednakiPolazniciImajuJednakHashCode() {
+        Polaznik prvi = new Polaznik("Matej", "Mance", "test@gmail.com", 2024);
+        Polaznik drugi = new Polaznik("Ivan", "Horvat", "test@gmail.com", 2025);
+
+        int prviHash = prvi.hashCode();
+        int drugiHash = drugi.hashCode();
+
+        assertEquals(prviHash, drugiHash);
+
+
     }
 
 }
